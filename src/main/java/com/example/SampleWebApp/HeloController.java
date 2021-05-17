@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController //json형식으로 반환하는 컨트롤러
 public class HeloController {
 	
 	String[] names = {"Kim","lee","park","choi","jo"};
@@ -14,7 +14,9 @@ public class HeloController {
 	
 	@RequestMapping("/{id}")
 	public DataObject index(@PathVariable int id) {
-		return new DataObject(id,names[id],mails[id]);
+		DataObject object = new DataObject(id,names[id],mails[id]); 
+		System.out.println(object.getClass().getName());
+		return object;
 	}
 	
 	class DataObject{
