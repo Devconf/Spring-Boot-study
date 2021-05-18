@@ -2,28 +2,21 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>top page</title>
+<title>main page</title>
 <meta
 	http-equiv="Content-Type"
 	content="text/html; charset=UTF-8" />
-<style>
-h1 {
-	font-size: 18pt;
-	font-weight: bold;
-	color: gray;
-}
 
-body {
-	font-size: 13pt;
-	color: gray;
-	margin: 5px 25px;
+<style>
+p {
+	font-size: 20pt;
+	font-weight: bold;
 }
 </style>
 </head>
 <body>
-	<h1>Helo page</h1>
 	<p
 		class="msg"
-		th:text="${msg}"></p>
+		th:text="|This is *{name}'s main page!!!|"></p>
 </body>
 </html>
