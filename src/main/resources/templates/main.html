@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>main page</title>
 <meta
 	http-equiv="Content-Type"
-	content="text/html; charset=UTF-8" />
+	content="text/html" charset="UTF-8" />
+
+<title>main page</title>
 
 <style>
 p {
@@ -18,5 +18,9 @@ p {
 	<p
 		class="msg"
 		th:text="|This is *{name}'s main page!!!|"></p>
+	<form action="/main" method="get">
+	<input type="submit" id="submit" value="Go home">
+	
+	</form>
 </body>
 </html>

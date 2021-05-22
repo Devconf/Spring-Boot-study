@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type"
-	content="text/html" charset="UTF-8" />
+<meta
+	http-equiv="Content-Type"
+	content="text/html"
+	charset="UTF-8" />
 <title>top page</title>
 <style>
 h1 {
@@ -66,7 +68,26 @@ body {
 		</div>
 		<input
 			type="submit"
+			name="submit"
 			value="Click" />
+	</form>
+	<form
+		action="/main"
+		method="post">
+		<input
+			type="text"
+			id="userID"
+			name="userID"
+			placeholder="ID" />
+		<input
+			type="password"
+			id="userPW"
+			name="userPW"
+			placeholder="PassWord"/> 
+		<input
+			type="submit"
+			name="signIn"
+			value="Sign In" />
 	</form>
 </body>
 </html>
