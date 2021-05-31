@@ -22,11 +22,6 @@ body {
 </head>
 <body>
 	<h1>Helo page</h1>
-	<p
-		class="msg"
-		th:text="${new java.util.Date().toString()}"></p>
-	<p th:text="${#dates.format(new java.util.Date(),'dd/MMM/yyyy HH:mm')}"></p>
-	<p th:text="${#numbers.formatInteger(1234,7)}"></p>
-	<p th:text="${#strings.toUpperCase('Welcome to spring.')}"></p>
+	<p th:text= "'from parameter ... id= ' + ${param.id[0] + ',name=' + param.name[0]}"></p>
 </body>
 </html>
