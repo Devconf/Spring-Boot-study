@@ -18,10 +18,24 @@ body {
 	color: gray;
 	margin: 5px 25px;
 }
+tr {
+	margin:5px;
+}
+th{
+	padding: 5px; color: white; background: darkgray;
+}
+td {
+	padding: 5px; color: black; background: #e0e0ff;
+}
 </style>
 </head>
 <body>
 	<h1 th:text= "#{content.title}">Helo page</h1>
-	<p><a th:href="@{'/'+ ${id}}">link</a></p> 
+	<p th:text="${msg}">message.</p>
+	<table th:object="${object}">
+	<tr><th>ID</th><td th:text="*{id}"></td></tr>
+	<tr><th>NAME</th><td th:text="*{name}"></td></tr>
+	<tr><th>MAIL</th><td th:text="*{value}"></td></tr>
+	</table> 
 </body>
 </html>

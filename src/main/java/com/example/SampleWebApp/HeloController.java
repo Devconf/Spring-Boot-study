@@ -10,61 +10,48 @@ import org.springframework.web.servlet.ModelAndView;
 public class HeloController {
 
 	@GetMapping("/")
-	public ModelAndView index(@RequestParam(value = "id",required = true) String id, ModelAndView mav) {
-		mav.addObject("msg", "폼을 전송해주세요.");
-		mav.addObject("id",id);
+	public ModelAndView index(ModelAndView mav) {
+		mav.addObject("msg", "current data.");
 		mav.setViewName("index");
-		return mav;
-	}
-
-	@PostMapping("/")
-	public ModelAndView send(@RequestParam(value = "check1", required = false) boolean check1,
-			@RequestParam(value = "radio1", required = false) String radio1,
-			@RequestParam(value = "select1", required = false) String select1,
-			@RequestParam(value = "select2", required = false) String[] select2, ModelAndView mav) {
-
-		String res = "";
-		try {
-			res = "check1 : " + check1 + " radio1 : " + radio1 + " select1 : " + select1 + "\nselect2 : ";
-		} catch (Exception e) {
-		}
-		try {
-			res += select2[0];
-			for (int i = 1; i < select2.length; i++) {
-				res += ", " + select2[i];
-			}
-
-		} catch (Exception e) {
-			res += null;
-		}
-		mav.addObject("msg", res);
-		mav.setViewName("index");
-		return mav;
-	}
-
-	
-	@PostMapping(value = "/main", name = "signIn") 
-	public ModelAndView signIn(
-			@RequestParam(value = "userID", required = true) String userId,
-			@RequestParam(value = "userPW",required = true) String userPW,
-			ModelAndView mav) {
-		if( userId.equals("devconf") && userPW.equals("132600qa@")) {
-			mav.addObject("name", "hyunsik");
-			System.out.println("success");
-			}
-		mav.setViewName("main");
-		return mav;
-	}		 
-	
-	@GetMapping(value = "/main", name = "signOut") 
-	public ModelAndView signOut(
-			ModelAndView mav) {
-		mav.setViewName("redirect:/");
+		DataObject obj = new DataObject(123, "lee", "lee@lower");
+		mav.addObject("object",obj);
 		return mav; 
 	}
 	
-	@GetMapping(value = "/home", name = "home")
-	public String home() {
-		return "home";
+	class DataObject{
+		private int id;
+		private String name;
+		private String value;
+		
+		public DataObject(int id, String name, String value) {
+			super();
+			this.id= id;
+			this.name=name;
+			this.value=value;
+		}
+		
+		public int getId() {
+			return this.id;
+		}
+		
+		public void setId(int id) {
+			this.id=id;
+		}
+		
+		public String getName() {
+			return this.name;
+		}
+		
+		public void setName(String name) {
+			this.name=name;
+		}
+		
+		public String getValue() {
+			return this.value;
+		}
+		
+		public void setValue(String value) {
+			this.value=value;
+		}
 	}
 }
