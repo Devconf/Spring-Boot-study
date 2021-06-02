@@ -22,6 +22,6 @@ body {
 </head>
 <body>
 	<h1 th:text= "#{content.title}">Helo page</h1>
-	<p th:text= "#{content.message}"></p>
+	<p><a th:href="@{'/'+ ${id}}">link</a></p> 
 </body>
 </html>

@@ -10,8 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class HeloController {
 
 	@GetMapping("/")
-	public ModelAndView index(ModelAndView mav) {
+	public ModelAndView index(@RequestParam(value = "id",required = true) String id, ModelAndView mav) {
 		mav.addObject("msg", "폼을 전송해주세요.");
+		mav.addObject("id",id);
 		mav.setViewName("index");
 		return mav;
 	}
@@ -52,7 +53,7 @@ public class HeloController {
 			System.out.println("success");
 			}
 		mav.setViewName("main");
-		return mav; 
+		return mav;
 	}		 
 	
 	@GetMapping(value = "/main", name = "signOut") 
@@ -60,5 +61,10 @@ public class HeloController {
 			ModelAndView mav) {
 		mav.setViewName("redirect:/");
 		return mav; 
-	}		 
+	}
+	
+	@GetMapping(value = "/home", name = "home")
+	public String home() {
+		return "home";
+	}
 }
