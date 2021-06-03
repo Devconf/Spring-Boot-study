@@ -31,7 +31,7 @@ td {
 </head>
 <body>
 	<h1 th:text= "#{content.title}">Helo page</h1>
-	<p th:utext="${msg}">message.</p>
+	<p th:text="${id} + ' is '+ (${check}?${trueValue}:${falseValue})">message.</p>
 	</div>
 </body>
 </html>
