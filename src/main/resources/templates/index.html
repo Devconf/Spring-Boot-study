@@ -31,7 +31,8 @@ td {
 </head>
 <body>
 	<h1 th:text= "#{content.title}">Helo page</h1>
-	<p th:text="${id} + ' is '+ (${check}?${trueValue}:${falseValue})">message.</p>
+	<p th:if="${check}" th:text="${id} + ' is '+ ${trueValue}">message.</p>
+	<p th:unless="${check}" th:text="${id} + ' is '+ ${falseValue}">message.</p>
 	</div>
 </body>
 </html>

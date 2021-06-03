@@ -12,9 +12,9 @@ public class HeloController {
 	public ModelAndView index(@PathVariable int id, ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("id",id);
-		mav.addObject("check",id%2==0);
-		mav.addObject("trueValue","Even number!");
-		mav.addObject("falseValue","Odd number...");
+		mav.addObject("check",id>=0);
+		mav.addObject("trueValue","POSITIVE!");
+		mav.addObject("falseValue","negative...");
 		return mav; 
 	}
 }
