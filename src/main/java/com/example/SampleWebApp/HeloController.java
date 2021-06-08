@@ -2,7 +2,10 @@ package com.example.SampleWebApp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.SampleWebApp.repository.MyDataRepository;
@@ -14,11 +17,19 @@ public class HeloController {
 	MyDataRepository repository;	
 	
 	@GetMapping("/")
-	public ModelAndView index(ModelAndView mav) {
+	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
+		mav.addObject("msg","this id sample content.");
 		Iterable<MyData> list = repository.findAll();
-		mav.addObject("data",list);
+		mav.addObject("datalist",list);
 		return mav; 	
+	}
+	
+	@PostMapping(value = "/")
+	@Transactional(readOnly = false)
+	public ModelAndView form(@ModelAttribute("formModel") MyData mydata , ModelAndView mav) {
+		repository.saveAndFlush(mydata);
+		return new ModelAndView("redirect:/");
 	}
 }
 
