@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.SampleWebApp.repository.MyDataRepository;
@@ -74,6 +75,22 @@ public class HeloController {
 	@Transactional(readOnly = false)
 	public ModelAndView updata(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		repository.saveAndFlush(mydata);
+		return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping(value = "/delete/{id}")
+	public ModelAndView delete(@PathVariable int id, ModelAndView mav) {
+		mav.setViewName("delete");
+		mav.addObject("title","delete my mydata");
+		Optional<MyData> data = repository.findById((long)id);
+		mav.addObject("formModel",data.get());
+		return mav;
+	}
+	
+	@PostMapping(value = "/delete")
+	@Transactional(readOnly = false)
+	public ModelAndView remove(@RequestParam long id, ModelAndView mav) {
+		repository.deleteById(id);
 		return new ModelAndView("redirect:/");
 	}
 }
