@@ -35,6 +35,7 @@ public class MyData {
 	private int age;
 	
 	@Column(nullable = true)
+	@Phone
 	private String memo;
 
 	public long getId() {
