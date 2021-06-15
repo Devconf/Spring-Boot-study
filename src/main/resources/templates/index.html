@@ -31,6 +31,7 @@ td {
 </head>
 <body>
 	<h1 th:text= "#{content.title}">Helo page</h1>
+	<p th:text="${msg}"></p>
 	<table>
 	<form method="post" action="/" th:object="${formModel}">
 	<tr><td><label for="name">이름</label></td>
