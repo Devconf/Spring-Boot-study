@@ -3,6 +3,8 @@ package com.example.SampleWebApp;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,19 @@ import com.example.SampleWebApp.repository.MyDataRepository;
 
 @Controller // spring-boot-starter-thymeleaf dependencies를 설정 해주었기 때문에 view탬플릿으로 동작 가능
 public class HeloController {
+
+	@Autowired
+	MyDataRepository repository;	
+	
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	MyDataDaoImpl dao;
 	
 	@PostConstruct
 	public void init() {
+		dao = new MyDataDaoImpl(entityManager);
+		
 		MyData d1 =new MyData();
 		d1.setName("kim");
 		d1.setAge(123);
@@ -44,16 +56,13 @@ public class HeloController {
 		d3.setMemo("070777777");
 		repository.saveAndFlush(d3);
 	}
-
-	@Autowired
-	MyDataRepository repository;	
 	
 	@GetMapping("/")
 	public ModelAndView index(@ModelAttribute("formModel") MyData mydata, ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("msg","this id sample content.");
 		mav.addObject("formModel",mydata);
-		Iterable<MyData> list = repository.findAll();
+		Iterable<MyData> list = dao.getAll();
 		mav.addObject("datalist",list);
 		return mav; 	
 	}
