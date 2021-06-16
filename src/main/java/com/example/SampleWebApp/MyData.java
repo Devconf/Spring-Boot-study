@@ -35,7 +35,7 @@ public class MyData {
 	private int age;
 	
 	@Column(nullable = true)
-	@Phone
+	@Phone(onlyNumber = true)
 	private String memo;
 
 	public long getId() {
