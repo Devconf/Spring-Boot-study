@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,6 +118,34 @@ public class HeloController {
 		List<MyData> list = dao.findByName(name);
 		repository.deleteById(list.get(0).getId());
 		return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping(value = "/find")
+	public ModelAndView find(ModelAndView mav) {
+		mav.setViewName("find");
+		mav.addObject("title","Find Page");
+		mav.addObject("msg","MyData의 예제입니다.");
+		mav.addObject("value","");
+		Iterable<MyData> list = dao.getAll();
+		mav.addObject("datalist", list);
+		return mav;
+	}
+	
+	@PostMapping(value = "/find")
+	public ModelAndView search(HttpServletRequest request, ModelAndView mav) {
+		mav.setViewName("find");
+		String param = request.getParameter("fstr");
+		if(param == "") {
+			mav= new ModelAndView("redirect:/find");
+		}
+		else {
+			mav.addObject("title","Find result");
+			mav.addObject("msg", "「" + param + "」의 검색 결과" );
+			mav.addObject("value", param);
+			List<MyData> list = dao.find(param);
+			mav.addObject("datalist",list);
+		}
+		return mav;
 	}
 }
 
