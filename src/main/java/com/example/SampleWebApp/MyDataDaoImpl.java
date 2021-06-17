@@ -30,4 +30,14 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 		return list;
 	}
 
+	@Override
+	public MyData findById(long id) {
+		return (MyData)this.entityManager.createQuery("from MyData where id = "+id).getSingleResult();
+	}
+
+	@Override
+	public List<MyData> findByName(String name) {
+		return (List<MyData>)this.entityManager.createQuery("from MyData where name = '"+ name+"'").getResultList();
+	}
+
 }

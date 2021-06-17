@@ -1,5 +1,6 @@
 package com.example.SampleWebApp;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -89,8 +90,8 @@ public class HeloController {
 	public ModelAndView edit(@ModelAttribute("formModel") MyData mydata, @PathVariable int id, ModelAndView mav) {
 		mav.setViewName("edit");
 		mav.addObject("title","edit my mydata");
-		Optional<MyData> data = repository.findById((long)id);
-		mav.addObject("formModel",data.get());
+		MyData data = dao.findById((long)id);
+		mav.addObject("formModel",data);
 		return mav;
 	}
 	
@@ -112,8 +113,9 @@ public class HeloController {
 	
 	@PostMapping(value = "/delete")
 	@Transactional(readOnly = false)
-	public ModelAndView remove(@RequestParam long id, ModelAndView mav) {
-		repository.deleteById(id);
+	public ModelAndView remove(@RequestParam String name, ModelAndView mav) {
+		List<MyData> list = dao.findByName(name);
+		repository.deleteById(list.get(0).getId());
 		return new ModelAndView("redirect:/");
 	}
 }

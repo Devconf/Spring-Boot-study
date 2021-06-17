@@ -27,7 +27,7 @@ td {
 <h1 th:text="${title}">Delete page</h1>
 <table>
 <form method="post" action="/delete" th:object="${formModel}">
-<input type="hidden" name="id" th:value="*{id}"/>
+<input type="hidden" name="name" th:value="*{name}"/>
 <tr><td><p th:text="|이름:   *{name}|"></p></td></tr>
 <tr><td><p th:text="|연령:   *{age}|"></p></td></tr>
 <tr><td><p th:text="*{mail}"></p></td></tr>
