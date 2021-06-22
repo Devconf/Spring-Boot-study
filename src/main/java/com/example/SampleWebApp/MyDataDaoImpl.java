@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.criteria.*;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,8 +25,12 @@ public class MyDataDaoImpl implements MyDataDao<MyData> {
 	
 	@Override
 	public List<MyData> getAll() {
-		Query query = this.entityManager.createQuery("from MyData");
-		List<MyData> list = query.getResultList();
+		List<MyData> list = null;
+		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<MyData> query = builder.createQuery(MyData.class);
+		Root<MyData> root = query.from(MyData.class);
+		query.select(root);
+		list = (List<MyData>) entityManager.createQuery(query).getResultList();
 		this.entityManager.close();
 		return list;
 	}
