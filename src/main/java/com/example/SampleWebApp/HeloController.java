@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
@@ -126,7 +127,7 @@ public class HeloController {
 		mav.addObject("title","Find Page");
 		mav.addObject("msg","MyData의 예제입니다.");
 		mav.addObject("value","");
-		Iterable<MyData> list = dao.getAll();
+		Iterable<MyData> list = repository.findByAge(10, 20);
 		mav.addObject("datalist", list);
 		return mav;
 	}
